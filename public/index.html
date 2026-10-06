@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Бесплатный онлайн-компилятор C++17 с редактором Monaco, вводом stdin и запуском через g++ на Alpine Linux." />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Онлайн-компилятор C++" />
+    <meta property="og:description" content="Пишите, компилируйте и запускайте C++ онлайн прямо в браузере." />
+    <meta property="og:type" content="website" />
+    <title>Онлайн-компилятор C++ — запуск C++17 в браузере</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main>
+      <section class="hero shell">
+        <header class="topbar">
+          <a class="brand" href="/" aria-label="C++ Playground">
+            <span class="brand-mark">&lt;/&gt;</span>
+            <span>C++ Playground</span>
+          </a>
+          <div class="badge"><span class="dot"></span> g++ · C++17</div>
+        </header>
+
+        <div class="hero-copy">
+          <div class="eyebrow">БЕСПЛАТНЫЙ ОНЛАЙН-КОМПИЛЯТОР</div>
+          <h1>Компилируйте и запускайте <span>C++ онлайн</span> в браузере</h1>
+          <p>Бесплатная онлайн-песочница и компилятор C++. Пишите код на C++ в браузере, нажимайте «Запустить» — g++ скомпилирует и выполнит программу за секунды. Не нужно настраивать MSVC, CMake или Visual Studio.</p>
+          <a class="hero-action" href="#playground">Начать писать код <span>↓</span></a>
+        </div>
+      </section>
+
+      <section id="playground" class="playground shell" aria-label="Редактор C++">
+        <div class="toolbar">
+          <button id="runButton" class="run-button"><span>▶</span> Запустить</button>
+          <button id="resetButton" class="secondary-button">Сбросить</button>
+          <select id="exampleSelect" aria-label="Пример кода">
+            <option value="">Примеры кода…</option>
+            <option value="hello">Hello, world!</option>
+            <option value="sum">Сумма чисел</option>
+            <option value="stl">Сортировка vector</option>
+            <option value="lambda">Лямбда</option>
+          </select>
+          <div id="status" class="status">Готово</div>
+        </div>
+
+        <div class="workspace">
+          <div class="panel editor-panel">
+            <div class="panel-heading"><span>main.cpp</span><span class="hint">Monaco Editor</span></div>
+            <div id="editor" aria-label="Исходный код C++"></div>
+            <textarea id="codeFallback" spellcheck="false" aria-label="Исходный код C++">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+int main() {
+    std::vector&lt;int&gt; numbers{5, 2, 8, 1, 3};
+    std::sort(numbers.begin(), numbers.end());
+
+    for (int number : numbers) {
+        std::cout &lt;&lt; number &lt;&lt; " ";
+    }
+    std::cout &lt;&lt; std::endl;
+    return 0;
+}</textarea>
+          </div>
+          <div class="panel side-panel">
+            <div class="panel-heading"><span>Входные данные</span><span class="hint">stdin</span></div>
+            <textarea id="input" spellcheck="false" aria-label="Входные данные" placeholder="Например:&#10;2 3 5"></textarea>
+            <div class="panel-heading output-heading"><span>Результат</span><span id="exitCode" class="hint"></span></div>
+            <pre id="output" class="output" aria-live="polite">Здесь появится вывод программы.</pre>
+          </div>
+        </div>
+        <div class="playground-footer">
+          <span>Alpine Linux · g++ · C++17 · STL</span>
+          <span>Ctrl / Cmd + Enter — запустить</span>
+        </div>
+      </section>
+
+      <section class="content shell">
+        <p class="lead">Редактор работает на том же движке, что и VS Code, поэтому подсветка синтаксиса C++, автодополнение ключевых слов и диагностические подчёркивания — всё на месте. Код компилируется через g++ на Alpine Linux, со всей C++ STL под рукой: <code>&lt;vector&gt;</code>, <code>&lt;map&gt;</code>, <code>&lt;unordered_map&gt;</code>, <code>&lt;algorithm&gt;</code>, <code>&lt;memory&gt;</code>, <code>&lt;thread&gt;</code>. Удобно, чтобы поиграться со смарт-указателями, проверить лямбду или подготовиться к собеседованию по C++. Для чистого C используйте <a href="https://coddy.tech/playground/ru/c" rel="noopener noreferrer">онлайн-компилятор C</a>.</p>
+
+        <h2>Почему эта C++-песочница полезна</h2>
+        <div class="feature-grid">
+          <article><div class="feature-icon">⚡</div><h3>Мгновенная сборка</h3><p>Пишите код, нажимайте «Запустить» и получайте результат g++ за секунды — без CMake и Visual Studio.</p></article>
+          <article><div class="feature-icon">⌨</div><h3>Редактор как в VS Code</h3><p>Подсветка синтаксиса C++, автодополнение, парные скобки и понятные ошибки компиляции g++.</p></article>
+          <article><div class="feature-icon">↳</div><h3>Полноценный stdin</h3><p><code>std::cin</code>, <code>std::getline</code> и <code>scanf</code> читают данные из поля ввода.</p></article>
+          <article><div class="feature-icon">◆</div><h3>Полная C++ STL</h3><p>Vector, map, unordered_map, algorithm, memory, thread и современные возможности C++17.</p></article>
+        </div>
+
+        <h2>Что можно создать в песочнице C++</h2>
+        <div class="use-cases">
+          <article><span>01</span><div><h3>Контейнеры и алгоритмы STL</h3><p>Vector, map, unordered_map, set, sort, transform и accumulate — классический набор для собеседований.</p></div></article>
+          <article><span>02</span><div><h3>Структуры данных и алгоритмы</h3><p>Связные списки, двоичные деревья, хеш-таблицы, BFS, DFS и динамическое программирование на C++17.</p></div></article>
+          <article><span>03</span><div><h3>Быстрые эксперименты</h3><p>Проверьте лямбду, замерьте сортировку, попробуйте <code>auto</code> или уточните арифметику указателей без CMake-проекта.</p></div></article>
+        </div>
+      </section>
+
+      <footer class="site-footer shell">
+        <span>C++ Playground</span>
+        <span>Код выполняется в изолированном Docker-контейнере с ограничением ресурсов.</span>
+      </footer>
+    </main>
+    <script src="/vendor/monaco/loader.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

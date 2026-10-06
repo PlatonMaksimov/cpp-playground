@@ -1,0 +1,53 @@
+services:
+  compiler:
+    build:
+      context: .
+    restart: unless-stopped
+    network_mode: none
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 80
+    mem_limit: 512m
+    cpus: 1.5
+    tmpfs:
+      - /tmp:size=384m,mode=1777,nosuid,nodev
+    volumes:
+      - compiler_socket:/run/cpp
+    environment:
+      MAX_CONCURRENT_JOBS: "${MAX_CONCURRENT_JOBS:-2}"
+      RATE_LIMIT_MAX: "${RATE_LIMIT_MAX:-20}"
+
+  caddy:
+    image: caddy:2.10-alpine
+    restart: unless-stopped
+    depends_on:
+      - compiler
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+      - CHOWN
+      - DAC_OVERRIDE
+      - SETGID
+      - SETUID
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - compiler_socket:/run/cpp:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      DOMAIN: "${DOMAIN}"
+
+volumes:
+  compiler_socket:
+  caddy_data:
+  caddy_config:

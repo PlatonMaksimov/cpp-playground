@@ -1,0 +1,19 @@
+{$DOMAIN} {
+	encode zstd gzip
+
+	reverse_proxy unix//run/cpp/compiler.sock {
+		transport http {
+			response_header_timeout 25s
+		}
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		-Server
+	}
+
+	log {
+		output stdout
+		format console
+	}
+}

@@ -1,0 +1,13 @@
+{
+  "name": "cpp-web-compiler",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Онлайн-компилятор C++17 с Monaco Editor и запуском через g++",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check public/app.js"
+  },
+  "dependencies": {
+    "monaco-editor": "0.52.2"
+  }
+}
